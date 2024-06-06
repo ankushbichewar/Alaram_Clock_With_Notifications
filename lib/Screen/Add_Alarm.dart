@@ -35,9 +35,9 @@ class _AddAlaramState extends State<AddAlarm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Icon(Icons.check),
           )
         ],
@@ -52,7 +52,7 @@ class _AddAlaramState extends State<AddAlarm> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
             width: MediaQuery.of(context).size.width,
             child: Center(
@@ -73,7 +73,7 @@ class _AddAlaramState extends State<AddAlarm> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: CupertinoTextField(
                   placeholder: "Add Label",
@@ -82,8 +82,8 @@ class _AddAlaramState extends State<AddAlarm> {
           ),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(" Repeat daily"),
               ),
               CupertinoSwitch(
@@ -117,7 +117,7 @@ class _AddAlaramState extends State<AddAlarm> {
 
                 Navigator.pop(context);
               },
-              child: Text("Set Alaram")),
+              child: const Text("Set Alaram")),
         ],
       ),
     );

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:alaram/Model/Model.dart';
 import 'package:alaram/Provider/Provier.dart';
 import 'package:alaram/Screen/Add_Alarm.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,10 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
-import 'package:another_flushbar/flushbar.dart';
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -46,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     context.read<alarmprovider>().Inituilize(context);
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {});
     });
 
@@ -57,12 +54,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEEEFF5),
+      backgroundColor: const Color(0xFFEEEFF5),
       appBar: AppBar(
         backgroundColor: Colors.deepPurpleAccent,
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Icon(
               Icons.menu,
               color: Colors.white,
@@ -78,7 +75,7 @@ class _MyAppState extends State<MyApp> {
       body: ListView(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.deepPurpleAccent,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30),
@@ -89,14 +86,14 @@ class _MyAppState extends State<MyApp> {
               DateFormat.yMEd().add_jms().format(
                     DateTime.now(),
                   ),
-              style: TextStyle(
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   color: Colors.white),
             )),
           ),
           Consumer<alarmprovider>(builder: (context, alarm, child) {
-            return Container(
+            return SizedBox(
               height: MediaQuery.of(context).size.height * 0.7,
               child: ListView.builder(
                   itemCount: alarm.modelist.length,
@@ -123,7 +120,7 @@ class _MyAppState extends State<MyApp> {
                                       children: [
                                         Text(
                                           alarm.modelist[index].dateTime!,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16,
                                               color: Colors.black),
@@ -131,31 +128,15 @@ class _MyAppState extends State<MyApp> {
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
-                                          child: Text("|" +
-                                              alarm.modelist[index].label
-                                                  .toString()),
+                                          child: Text("|${alarm.modelist[index].label}"),
                                         ),
                                       ],
                                     ),
                                     CupertinoSwitch(
                                         value:(alarm.modelist[index].milliseconds! < DateTime.now().microsecondsSinceEpoch)? false:alarm.modelist[index].check,
                                         onChanged: (v) {
-
-                                        
-
-
-
-
-
-                        
-
                                           alarm.EditSwitch(index, v);
-
-
-
-
                                           alarm.CancelNotification(alarm.modelist[index].id!);
-
                                         }),
                                   ],
                                 ),
@@ -169,7 +150,7 @@ class _MyAppState extends State<MyApp> {
           }),
           Container(
             height: MediaQuery.of(context).size.height * 0.1,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30)),
@@ -178,13 +159,13 @@ class _MyAppState extends State<MyApp> {
                 child: GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddAlarm()));
+                    MaterialPageRoute(builder: (context) => const AddAlarm()));
               },
               child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white, shape: BoxShape.circle),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Icon(Icons.add),
                   )),
             )),
